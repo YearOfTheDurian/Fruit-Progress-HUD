@@ -145,6 +145,7 @@ public class FruitProgressHUD extends Fragment {
 
     public void show(String message) {
         mTextView.setText(message);
+        showHUD();
         animate(this.getView());
     }
 
