@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <View
+        android:id="@+id/progress_hud_background"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/progress_hud_background"
+        android:alpha="0.1">
+
+    </View>
+
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/progress_hud_image_view"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+    </ImageView>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/progress_hud_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/progress_hud_image_view"
+        android:textAlignment="center"
+        android:fontFamily="@font/acumin_rpro"
+        android:layout_marginTop="8dp"
+        android:textSize="16dp">
+    </TextView>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/progress_hud_text_view_end"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/progress_hud_image_view"
+        android:textAlignment="center"
+        android:fontFamily="@font/acumin_bdpro"
+        android:layout_marginTop="8dp"
+        android:textSize="16dp">
+    </TextView>
+
+</RelativeLayout>
