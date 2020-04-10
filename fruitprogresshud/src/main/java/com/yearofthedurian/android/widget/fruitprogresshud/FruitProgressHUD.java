@@ -155,4 +155,8 @@ public class FruitProgressHUD extends Fragment {
         mDuration = duration;
         animatedVectorDrawableCompat.stop();
     }
+
+    public void setAlpha(float alpha) {
+        mView.setAlpha(alpha);
+    }
 }
