@@ -49,6 +49,8 @@ public class FruitProgressHUD extends Fragment {
         mTextView = view.findViewById(R.id.progress_hud_text_view);
         mTextViewComplete = view.findViewById(R.id.progress_hud_text_view_end);
 
+        hideHUD();
+
         return view;
     }
 
