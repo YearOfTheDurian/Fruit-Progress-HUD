@@ -50,6 +50,7 @@ public class FruitProgressHUD extends Fragment {
         mTextViewComplete = view.findViewById(R.id.progress_hud_text_view_end);
 
         hideHUD();
+        setTheme(FruitProgressTheme.LIGHT);
 
         return view;
     }
@@ -161,5 +162,28 @@ public class FruitProgressHUD extends Fragment {
 
     public void setAlpha(float alpha) {
         mView.setAlpha(alpha);
+    }
+
+    public void setTheme(FruitProgressTheme theme) {
+        switch (theme) {
+            case LIGHT:
+                mView.setBackgroundColor(getResources().getColor(R.color.colorOffWhite, null));
+                mTextView.setTextColor(getResources().getColor(R.color.colorDarkGreen, null));
+                mTextViewComplete.setTextColor(getResources().getColor(R.color.colorLightGreen, null));
+                break;
+            case DARK:
+                mView.setBackgroundColor(getResources().getColor(R.color.colorBlack, null));
+                mTextView.setTextColor(getResources().getColor(R.color.colorOffWhite, null));
+                mTextViewComplete.setTextColor(getResources().getColor(R.color.colorLightGreen, null));
+                break;
+        }
+    }
+
+    private void switchTextViewCompleteColor(boolean success) {
+        if (success) {
+            mTextViewComplete.setTextColor(getResources().getColor(R.color.colorLightGreen, null));
+        } else {
+            mTextViewComplete.setTextColor(getResources().getColor(R.color.colorWarning, null));
+        }
     }
 }

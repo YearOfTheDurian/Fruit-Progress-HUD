@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorOffWhite">#F9F9F9</color>
+    <color name="colorLightGreen">#22AE66</color>
     <color name="colorDarkGreen">#215D50</color>
+    <color name="colorWarning">#EE4119</color>
     <color name="colorBlack">#000000</color>
 </resources>
