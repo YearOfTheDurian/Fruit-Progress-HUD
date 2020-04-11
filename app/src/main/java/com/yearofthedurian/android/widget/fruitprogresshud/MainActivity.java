@@ -14,6 +14,7 @@ import android.content.Context;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -39,6 +40,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fruitProgressHUD  = (FruitProgressHUD) getSupportFragmentManager().findFragmentById(R.id.fragment_progress_hud);
+
+        fruitProgressHUD.setTheme(FruitProgressTheme.DARK);
+        fruitProgressHUD.setAlpha(0.3f);
+
+        fruitProgressHUD.show("Loading...");
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fruitProgressHUD.dismiss("Success", 1000, true);
+            }
+        }, 2000);
+
+
+
+
+
 
     }
 

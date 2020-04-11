@@ -33,6 +33,7 @@ public class FruitProgressHUD extends Fragment {
     private boolean stopAnimation = false;
     private int mDuration;
     private boolean mSuccess;
+    private FruitProgressTheme mTheme;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,8 +50,11 @@ public class FruitProgressHUD extends Fragment {
         mTextView = view.findViewById(R.id.progress_hud_text_view);
         mTextViewComplete = view.findViewById(R.id.progress_hud_text_view_end);
 
+        animatedVectorDrawableCompat = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.avd_durian);
+        animatedVectorDrawableCompatSuccess = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.avd_success_durian);
+        animatedVectorDrawableCompatFailure = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.avd_failure_durian);
+
         hideHUD();
-        setTheme(FruitProgressTheme.LIGHT);
 
         return view;
     }
@@ -71,13 +75,14 @@ public class FruitProgressHUD extends Fragment {
         mImageView.setVisibility(View.INVISIBLE);
         mTextView.setVisibility(View.INVISIBLE);
         mTextViewComplete.setVisibility(View.INVISIBLE);
+        resetHUD();
     }
 
     private void showHUD() {
         mView.setVisibility(View.VISIBLE);
         mImageView.setVisibility(View.VISIBLE);
         mTextView.setVisibility(View.VISIBLE);
-        resetHUD();
+        mTextViewComplete.setVisibility(View.INVISIBLE);
     }
 
     private void resetHUD() {
@@ -87,10 +92,6 @@ public class FruitProgressHUD extends Fragment {
 
 
     private void animate(View view) {
-        animatedVectorDrawableCompat = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.avd_durian);
-        animatedVectorDrawableCompatSuccess = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.avd_success_durian);
-        animatedVectorDrawableCompatFailure = AnimatedVectorDrawableCompat.create(getContext(), R.drawable.avd_failure_durian);
-
         animatedVectorDrawableCompat.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
             @Override
             public void onAnimationEnd(Drawable drawable) {
@@ -153,7 +154,9 @@ public class FruitProgressHUD extends Fragment {
     public void dismiss(String message, final int duration, boolean success) {
         stopAnimation = true;
         mSuccess = success;
+        switchTextViewCompleteColor(success);
         switchTextField();
+
         mTextViewComplete.setText(message);
 
         mDuration = duration;
@@ -165,25 +168,46 @@ public class FruitProgressHUD extends Fragment {
     }
 
     public void setTheme(FruitProgressTheme theme) {
+        mTheme = theme;
         switch (theme) {
             case LIGHT:
-                mView.setBackgroundColor(getResources().getColor(R.color.colorOffWhite, null));
+                mView.setBackground(getResources().getDrawable(R.drawable.progress_hud_background_shape_light, null));
                 mTextView.setTextColor(getResources().getColor(R.color.colorDarkGreen, null));
                 mTextViewComplete.setTextColor(getResources().getColor(R.color.colorLightGreen, null));
+                animatedVectorDrawableCompat.setTint(getResources().getColor(R.color.colorDarkGreen, null));
+                animatedVectorDrawableCompatSuccess.setTint(getResources().getColor(R.color.colorDarkGreen, null));
+                animatedVectorDrawableCompatFailure.setTint(getResources().getColor(R.color.colorDarkGreen, null));
                 break;
             case DARK:
-                mView.setBackgroundColor(getResources().getColor(R.color.colorBlack, null));
+                mView.setBackground(getResources().getDrawable(R.drawable.progress_hud_background_shape_dark, null));
                 mTextView.setTextColor(getResources().getColor(R.color.colorOffWhite, null));
                 mTextViewComplete.setTextColor(getResources().getColor(R.color.colorLightGreen, null));
+                animatedVectorDrawableCompat.setTint(getResources().getColor(R.color.colorOffWhite, null));
+                animatedVectorDrawableCompatSuccess.setTint(getResources().getColor(R.color.colorOffWhite, null));
+                animatedVectorDrawableCompatFailure.setTint(getResources().getColor(R.color.colorOffWhite, null));
                 break;
         }
     }
 
     private void switchTextViewCompleteColor(boolean success) {
         if (success) {
-            mTextViewComplete.setTextColor(getResources().getColor(R.color.colorLightGreen, null));
+            switch (mTheme) {
+                case LIGHT:
+                    mTextViewComplete.setTextColor(getResources().getColor(R.color.colorLightGreen, null));
+                    break;
+                case DARK:
+                    mTextViewComplete.setTextColor(getResources().getColor(R.color.colorOffWhite, null));
+                    break;
+            }
         } else {
-            mTextViewComplete.setTextColor(getResources().getColor(R.color.colorWarning, null));
+            switch (mTheme) {
+                case LIGHT:
+                    mTextViewComplete.setTextColor(getResources().getColor(R.color.colorDarkGreen, null));
+                    break;
+                case DARK:
+                    mTextViewComplete.setTextColor(getResources().getColor(R.color.colorOffWhite, null));
+                    break;
+            }
         }
     }
 }

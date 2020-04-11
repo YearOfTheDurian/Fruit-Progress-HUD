@@ -9,7 +9,7 @@
         android:layout_height="150dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/progress_hud_background"
+        android:background="@drawable/progress_hud_background_shape_light"
         android:alpha="0.1">
 
     </View>

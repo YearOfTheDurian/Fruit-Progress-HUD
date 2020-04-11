@@ -4,5 +4,6 @@
     <color name="colorLightGreen">#22AE66</color>
     <color name="colorDarkGreen">#215D50</color>
     <color name="colorWarning">#EE4119</color>
+    <color name="colorLightWarning">#FF8E74</color>
     <color name="colorBlack">#000000</color>
 </resources>
